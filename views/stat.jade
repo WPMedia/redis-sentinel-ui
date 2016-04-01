@@ -1,27 +1,27 @@
 extends layout
 
 block content
-    h4 选择服务器：
+    h4 Select server：
     each server in servers
         div(class=["checkbox", "server"])
             label
                 input(type="checkbox", value="#{server}" checked=true)
                 span #{server}
-    h4 选择指标：
+    h4 Select itme：
     each v, k in indexs
         div(class=["checkbox", "index"])
             label
                 - var isCMDPS = k === 'cmd_ps'
                 input(type="checkbox", value="#{k}" checked=isCMDPS)
                 span #{v}
-    h4 选择聚合方式：
+    h4 Select the aggregation：
     each v, k in ways
         div(class="radio")
             label
                 - var isDefault = k === 'default'
                 input(type="radio", name="reduce_way", value="#{k}" checked=isDefault)
                 span #{v}
-    h4 选择时间范围：
+    h4 Select a time range:：
     div(class="form-inline")
         div(class=["input-group", "date"], id="begin_datetime")
             input(type="text", class="form-control", name="begin-datetime")
@@ -31,6 +31,6 @@ block content
             input(type="text", class="form-control", name="end-datetime")
             span(class="input-group-addon")
                 span(class=["glyphicon", "glyphicon-calendar"])
-        button(type="submit", class=["btn", "btn-primary"], id="show_stat") 提交
+        button(type="submit", class=["btn", "btn-primary"], id="show_stat") Submit
 
     div(class="stat-graph-part")

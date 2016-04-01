@@ -56,7 +56,7 @@ function _diffTime(begin, end) {
 }
 
 function _checkStatTime(begin, end) {
-    // 时间戳格式: "xxxx-xx-xx xx:xx:xx"
+    // 时间戳格式:datetime format "xxxx-xx-xx xx:xx:xx"
     let regexPattern = /\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}/;
     let timeDiff = _diffTime(begin, end);
 
@@ -70,7 +70,7 @@ function _checkStatTimeRange(begin, end, reduceWay) {
     let timeDiff = _diffTime(begin, end);
 
     if (reduceWay === 'default') {
-        // 考虑性能, 限制只能获取3天范围的数据
+        // 考虑性能, 限制只能获取3天范围的数据 /For performance, limit the scope can only get three days of data
         return timeDiff <= 3 * 24 * 3600;
     } else {
         return timeDiff <= 30 * 24 * 3600;
@@ -85,7 +85,7 @@ function _findReduceFactor(length) {
 }
 
 /**
- * 最大值化处理
+ * 最大值化处理 /Maximum treatment
  * @param rangeDataSet
  * @param beginIndex
  * @param reduceFactor
@@ -110,7 +110,7 @@ function _byMax(rangeDataSet, beginIndex, reduceFactor, valueType) {
 }
 
 /**
- * 均值化处理
+ * 均值化处理 /Mean treatment
  * @param rangeDataSet
  * @param beginIndex
  * @param reduceFactor
@@ -134,7 +134,7 @@ function _byAverage(rangeDataSet, beginIndex, reduceFactor, valueType) {
 }
 
 /**
- * 按选定算法对数据进行处理
+ * 按选定算法对数据进行处理 /According to the selected algorithm for data processing
  * @param dataSet
  * @param algorithm
  * @param valueType
@@ -163,7 +163,7 @@ function _reduceDataSet(dataSet, algorithm, valueType) {
 }
 
 /**
- * 对数据集进行格式转换
+ * 对数据集进行格式转换 /Data set format conversion
  * @param dataSet
  * @returns {Array}
  * @private
@@ -178,9 +178,9 @@ function _justFormatDataSet(dataSet) {
 
 function _stat(req, res) {
     /**
-     * 请求参数:
+     * 请求参数:Request parameters:
      *  - name: 指标名称
-     *  - server: 目标服务器
+     *  - server: 目标服务器 
      *  - begin_time: 开始时间
      *  - end_time: 截止时间
      *  - reduce_way: 数据处理方式
@@ -193,23 +193,28 @@ function _stat(req, res) {
 
     if (statName === undefined || targetServers === undefined
         || statBeginTime === undefined || statEndTime === undefined) {
-        res.toResponse('缺少必要的请求参数!', 400);
+        // res.toResponse('缺少必要的请求参数!', 400);
+        res.toResponse('Missing required request parameters!', 400);
         return;
     }
     if (_checkStatName(statName) === false) {
-        res.toResponse('参数name不合法!', 400);
+        // res.toResponse('参数name不合法!', 400);
+        res.toResponse('Parameter name invalid!', 400);
         return;
     }
     if (_checkStatTime(statBeginTime, statEndTime) === false) {
-        res.toResponse('参数statBeginTime或statEndTime不合法!', 400);
+        res.toResponse('Parameter statBeginTime or statEndTime invalid!', 400);
+        // res.toResponse('参数statBeginTime或statEndTime不合法!', 400);
         return;
     }
     if (_checkReduceWay(reduceWay) === false) {
-        res.toResponse('数据聚合方式不合法!', 400);
+        // res.toResponse('数据聚合方式不合法!', 400);
+        res.toResponse('Data aggregation is not valid!', 400);
         return;
     }
     if ( _checkStatTimeRange(statBeginTime, statEndTime, reduceWay) === false) {
-        res.toResponse('时间范围不合法!', 400);
+        res.toResponse('Time range invalid!', 400);
+        // res.toResponse('时间范围不合法!', 400);
         return;
     }
     targetServers = targetServers.split(',');

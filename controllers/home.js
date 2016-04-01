@@ -24,7 +24,8 @@ function _home(req, res) {
             Logger.error(err);
 
             res.statusCode = 500;
-            res.write('系统异常,请联系管理员');
+            // res.write('系统异常,请联系管理员');
+            res.write('System errors, please contact the administrator');
             res.end();
             return;
         }

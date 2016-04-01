@@ -17,7 +17,8 @@ function _formatUpTime(seconds) {
     var minute = Math.floor(seconds % 3600 / 60);
     var second = seconds % 60;
 
-    return StdUtil.format('%d天%d时%d分%d秒', day, hour, minute, second);
+    return StdUtil.format('%d day %d hour %d minute %d second', day, hour, minute, second);
+    // return StdUtil.format('%d天%d时%d分%d秒', day, hour, minute, second);
 }
 
 /**

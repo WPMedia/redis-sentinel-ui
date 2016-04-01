@@ -13,12 +13,14 @@ var Logger = require('./utils/logger');
 
 // 配置检查
 if (!config.sentinels.length) {
-    Logger.error('请配置sentinel服务器');
+    Logger.error('Configure the sentinel server');
+    // Logger.error('请配置sentinel服务器');
 }
 
 if (cluster.isMaster) {
     // Fork workers.
-    Logger.info('主进程id: %d', process.pid);
+    Logger.info('Main Process id: %d', process.pid);
+    // Logger.info('主进程id: %d', process.pid);
     for (var i = 0; i < numCPUs; i++) {
         cluster.fork();
     }
@@ -30,5 +32,6 @@ if (cluster.isMaster) {
     // Workers can share any TCP connection
     // In this case it is an HTTP server
     http.createServer(routes).listen(config.port);
-    Logger.info('进程id:', process.pid, '监听端口:', config.port);
+    Logger.info('Process id:', process.pid, 'Listen Port:', config.port);
+    // Logger.info('Process id:', process.pid, '监听端口:', config.port);
 }

@@ -8,10 +8,15 @@ var Highcharts = require('highcharts');
 Highcharts.setOptions({ global: { useUTC: false } });
 
 var statTitleMapper = {
-    'connected_client': '客户端连接数(个)',
-    'used_memory': '内存使用量(MB)',
-    'cmd_ps': '每秒处理命令数(个)'
+    'connected_client': 'Connected Clients',
+    'used_memory': 'Used Memory(MB)',
+    'cmd_ps': 'Processed commands per second'
 };
+// var statTitleMapper = {
+//     'connected_client': '客户端连接数(个)',
+//     'used_memory': '内存使用量(MB)',
+//     'cmd_ps': '每秒处理命令数(个)'
+// };
 
 function genErrorAlert(xhr) {
     return '<div class="alert alert-danger error-tip" role="alert">' +
@@ -21,12 +26,12 @@ function genErrorAlert(xhr) {
 
 $(function () {
     $('#begin_datetime').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
+        format: 'MM/DD/YYYY HH:mm:ss',
         defaultDate: new Date(Date.now() - (60 * 60 * 12 * 1000)),
         sideBySide: true
     });
     $('#end_datetime').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
+        format: 'MM/DD/YYYY HH:mm:ss',
         defaultDate: new Date(),
         sideBySide: true
     });
@@ -48,7 +53,7 @@ $(function () {
         // 加loading效果
         var loadingPart = '<div class="row" id="loading_part">' +
                 '<div class="loading-tip col-md-6"">' +
-                '<span>正在执行命令,请耐心等待...</span>' +
+                '<span>Command is being executed, please wait ...</span>' +
                 '</div></div>';
         $cmdOutput.append(loadingPart);
 
@@ -101,7 +106,7 @@ $(function () {
         $statGraphPart.empty();
 
         if (selectedServer.length === 0 || selectedIndex.length === 0 || !beginDateTime || !endDateTime) {
-            $statGraphPart.append('<div class="alert alert-danger error-tip col-md-6" role="alert">缺少必要参数!</div>');
+            $statGraphPart.append('<div class="alert alert-danger error-tip col-md-6" role="alert">Missing required parameters!</div>');
             return;
         }
 
@@ -111,7 +116,7 @@ $(function () {
             var loadingPartID = 'loading_' + ele,
                 loadingPart = '<div class="row" id="'+ loadingPartID +'">' +
                     '<div class="loading-tip col-md-6"">' +
-                    '<span>正在加载数据,请耐心等待...</span>' +
+                    '<span>Loading data, please wait...</span>' +
                     '</div></div>';
 
             $statGraphPart.append(loadingPart);

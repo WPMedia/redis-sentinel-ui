@@ -133,7 +133,8 @@ function safeDecodeURIComponent(text) {
  */
 function staticService(pathname, callback) {
     if (pathname.indexOf(config.static_prefix) !== 0) {
-        callback({code: 404, msg: '不存在目标文件'});
+        callback({code: 404, msg: 'Destination file does not exist'});
+        // callback({code: 404, msg: '不存在目标文件'});
         return;
     }
 
@@ -147,7 +148,8 @@ function staticService(pathname, callback) {
     } catch (err) {
         Logger.error(err);
 
-        callback({code: 500, msg: '系统异常'});
+        callback({code: 500, msg: 'System errors'});
+        // callback({code: 500, msg: '系统异常'});
         return;
     }
 
@@ -157,7 +159,8 @@ function staticService(pathname, callback) {
                 callback(err ? {code: 500, msg: err.message} : null, {cached: false, data: data});
             });
         } else {
-            callback({code: 404, msg: '不存在目标文件'});
+            callback({code: 404, msg: 'Destination file does not exist'});
+            // callback({code: 404, msg: '不存在目标文件'});
         }
         return;
     }
@@ -165,12 +168,14 @@ function staticService(pathname, callback) {
     var file = staticFileObjs[filename];
     if (!file) {
         if (path.basename(filename)[0] === '.') {
-            callback({code: 403, msg: '没有权限'});
+            callback({code: 403, msg: 'Permission denied'});
+            // callback({code: 403, msg: '没有权限'});
             return;
         }
 
         if (!fileStat.isFile()) {
-            callback({code: 404, msg: '不存在目标文件'});
+            callback({code: 404, msg: 'Destination file does not exist'});
+            // callback({code: 404, msg: '不存在目标文件'});
             return;
         }
 

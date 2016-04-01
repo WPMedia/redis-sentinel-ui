@@ -5,6 +5,7 @@
  * @description:
  *
  * 连接sqlite数据的model层
+ * Model layer for Sqlite data connection
  *
  */
 
@@ -18,7 +19,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(config.storage_file);
 
 /**
- * 更新数据库中sentinel的状态
+ * 更新数据库中sentinel的状态 /Update status of sentinel database
  *
  * @param sentinel_addr
  * @param status
@@ -34,7 +35,7 @@ function _updateSentinelStatus(sentinel_addr, status, callback) {
 }
 
 /**
- * 从数据库中获取某个sentinel的状态
+ * 从数据库中获取某个sentinel的状态 /getSentinelPreviousStatus
  *
  * @param sentinel_addr
  * @param callback
@@ -48,7 +49,7 @@ function _getSentinelPreviousStatus(sentinel_addr, callback) {
 }
 
 /**
- * 从数据库中随便获取一个可用sentinel的地址
+ * 从数据库中随便获取一个可用sentinel的地址 //randomly get an available address from the database sentinel
  *
  * @param callback
  * @private

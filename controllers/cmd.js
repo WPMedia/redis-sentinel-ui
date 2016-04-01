@@ -13,7 +13,7 @@ var ValidRedisCMDs = require('ioredis/commands');
 var cmdRespParser = require('../utils/cmdRespParser');
 var config = require('../config');
 
-// 检测 命令 是否有效
+// 检测 命令 是否有效 / Check whether the command is valid
 function isValidCommand(cmd) {
     cmd = cmd.toLowerCase();
     return !!(cmd in ValidRedisCMDs);
@@ -28,18 +28,20 @@ function isValidCommand(cmd) {
 
 function cmd(req, res) {
     /**
-     * 请求参数:
-     * 1. cmd: 大写的Redis命令
-     * 2. params: 命令参数, 多个参数以空格分隔
+     * 请求参数: Request parameters:
+     * 1. cmd: 大写的Redis命令 /Uppercase Redis commands
+     * 2. params: 命令参数, 多个参数以空格分隔 /Command parameters, multiple parameters separated by spaces
      */
     var cmd = req.body.cmd.toUpperCase();
     if (!cmd || !isValidCommand(cmd)) {
-        res.toResponse('参数cmd不合法!', 400);
+        res.toResponse('Parameter cmd invalid!', 400);
+        // res.toResponse('参数cmd不合法!', 400);
         return;
     }
     var params = req.body.params;
     if (params === undefined) {
-        res.toResponse('缺少必要的请求参数!', 400);
+        res.toResponse('Missing required request parameters!', 400);
+        // res.toResponse('缺少必要的请求参数!', 400);
         return;
     }
     params = params.split(' ');
