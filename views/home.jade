@@ -91,16 +91,16 @@ block content
                             label Total commands processed：
                             span #{redis.total_commands_processed}
                         div(class="col-md-6")
-                            label 每秒处理命令数/instantaneous operations per second：
+                            label instantaneous operations per second：
                             span #{redis.instantaneous_ops_per_sec}
                     div(class="row")
                         div(class="col-md-6")
-                            label 查询命中数/Keyspace hits：
+                            label Keyspace hits：
                             span #{redis.keyspace_hits}
                         div(class="col-md-6")
-                            label 查询未命中数/Keyspace misses：
+                            label Keyspace misses：
                             span #{redis.keyspace_misses}
                     div(class="row")
                         div(class="col-md-6")
-                            label 查询命中率/Hit rate：
+                            label Hit rate：
                             span #{redis.hit_rate}
