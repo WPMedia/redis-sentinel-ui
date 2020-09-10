@@ -17,7 +17,7 @@
     "cn-bootstrap-datetimepicker": "^4.15.36",
     "co-body": "^4.0.0",
     "debug": "^2.2.0",
-    "highcharts": "^4.2.0",
+    "highcharts": "^8.2.0",
     "ioredis": "^1.11.1",
     "jade": "^1.11.0",
     "jquery": ">=1.8.3 <2.2.0",
